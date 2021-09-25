@@ -1,7 +1,5 @@
 FROM ubuntu:16.04
 
-LABEL maintainer="Mike Ehrenberg <mvberg@gmail.com>"
-
 RUN  apt-get update \
   && apt-get install -y wget \
   && apt-get install -y unzip \
@@ -17,23 +15,23 @@ RUN  apt-get update \
 # Setup IB TWS
 RUN mkdir -p /opt/TWS
 WORKDIR /opt/TWS
-RUN wget -q http://cdn.quantconnect.com/interactive/ibgateway-latest-standalone-linux-x64-v974.4g.sh
-RUN chmod a+x ibgateway-latest-standalone-linux-x64-v974.4g.sh
+RUN wget -q https://download2.interactivebrokers.com/installers/ibgateway/stable-standalone/ibgateway-stable-standalone-linux-x64.sh
+RUN chmod a+x ibgateway-stable-standalone-linux-x64.sh
 
 # Setup  IBController
 RUN mkdir -p /opt/IBController/ && mkdir -p /opt/IBController/Logs
 WORKDIR /opt/IBController/
-RUN wget -q http://cdn.quantconnect.com/interactive/IBController-QuantConnect-3.2.0.5.zip
-RUN unzip ./IBController-QuantConnect-3.2.0.5.zip
+RUN wget -q https://github.com/ib-controller/ib-controller/releases/download/3.4.0/IBController-3.4.0.zip
+RUN unzip ./IBController-3.4.0.zip
 RUN chmod -R u+x *.sh && chmod -R u+x Scripts/*.sh
 
 WORKDIR /
 
 # Install TWS
-RUN yes n | /opt/TWS/ibgateway-latest-standalone-linux-x64-v974.4g.sh
+RUN yes '' | /opt/TWS/ibgateway-stable-standalone-linux-x64.sh
 
 ENV DISPLAY :0
-
+`
 ADD runscript.sh runscript.sh
 ADD ./vnc/xvfb_init /etc/init.d/xvfb
 ADD ./vnc/vnc_init /etc/init.d/vnc
@@ -52,5 +50,9 @@ RUN dos2unix /usr/bin/xvfb-daemon-run \
 # Below files copied during build to enable operation without volume mount
 COPY ./ib/IBController.ini /root/IBController/IBController.ini
 COPY ./ib/jts.ini /root/Jts/jts.ini
+
+EXPOSE 4001
+EXPOSE 4002
+EXPOSE 5900
 
 CMD bash runscript.sh
