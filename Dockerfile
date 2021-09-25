@@ -31,7 +31,7 @@ WORKDIR /
 RUN yes '' | /opt/TWS/ibgateway-stable-standalone-linux-x64.sh
 
 ENV DISPLAY :0
-`
+
 ADD runscript.sh runscript.sh
 ADD ./vnc/xvfb_init /etc/init.d/xvfb
 ADD ./vnc/vnc_init /etc/init.d/vnc
