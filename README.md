@@ -50,7 +50,19 @@ Please do not open your box to the internet.
 
 ### Troubleshooting
 
-Sometimes, when running in non-daemon mode, you will see this:
+⚠️ You may need to uncheck "Allow connections from localhost only" and add valid Trusted local IP address
+
+![settings](docs/port.png)
+```bash
+# find container IP address
+docker container inspect ib-gateway-docker_tws_1 | grep IPAddress
+# find host ip address within the same subnet
+ifconfig
+# then add it to trusted ip address list
+```
+
+
+ ⚠️Sometimes, when running in non-daemon mode, you will see this:
 
 ```java
 Exception in thread "main" java.awt.AWTError: Can't connect to X11 window server using ':0' as the value of the DISPLAY variable.
