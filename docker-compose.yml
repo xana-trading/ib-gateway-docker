@@ -1,8 +1,7 @@
-version: '2'
+version: '3'
 services:
   tws:
     image: ib-gateway:latest
-
     ports:
       - 4001:4001
       - 4002:4002
