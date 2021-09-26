@@ -21,9 +21,9 @@ RUN chmod a+x ibgateway-stable-standalone-linux-x64.sh
 # Setup  IBController
 RUN mkdir -p /opt/IBController/ && mkdir -p /opt/IBController/Logs
 WORKDIR /opt/IBController/
-RUN wget -q https://github.com/ib-controller/ib-controller/releases/download/3.4.0/IBController-3.4.0.zip
-RUN unzip ./IBController-3.4.0.zip
-RUN chmod -R u+x *.sh && chmod -R u+x Scripts/*.sh
+RUN wget -q https://github.com/IbcAlpha/IBC/releases/download/3.10.0/IBCLinux-3.10.0.zip
+RUN unzip ./IBCLinux-3.10.0.zip
+RUN chmod -R u+x *.sh && chmod -R u+x scripts/*.sh
 
 WORKDIR /
 
@@ -49,7 +49,7 @@ RUN dos2unix /usr/bin/xvfb-daemon-run \
 
 # Below files copied during build to enable operation without volume mount
 COPY ./ib/IBController.ini /root/IBController/IBController.ini
-COPY ./ib/jts.ini /root/Jts/jts.ini
+COPY ./ib/jts.ini /opt/IBController/Settings/jts.ini
 
 EXPOSE 4001
 EXPOSE 4002
