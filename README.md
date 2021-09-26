@@ -9,7 +9,7 @@ IB Gateway running in Docker with [IBC](https://github.com/IbcAlpha/IBC) and VNC
 
 ```bash
 ./build.sh
-# after adding TWSUSERID and TWSPASSWORD
+# after adding TWSUSERID and TWSPASSWORD to docker-compose.yml
 docker-compose up
 ```
 
