@@ -4,7 +4,9 @@ DIR="$( cd "$(dirname ${BASH_SOURCE[0]})"; pwd -P )"
 pushd . > /dev/null
 cd $DIR
 
-docker build -t ib-gateway:latest .
+sudo docker-compose down
+sudo docker rmi $(sudo docker images -f "dangling=true" -q)
+sudo docker build -t ib-gateway:latest .
 
 echo 'Finished'
 
